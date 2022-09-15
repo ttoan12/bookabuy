@@ -1,1 +1,57 @@
-<p>book-list works!</p>
+<!-- Header-->
+<header class="bg-dark py-5" style="background: url('/assets/images/book_banner.jpg') no-repeat fixed center -250px">
+  <div class="container px-4 px-lg-5" style="margin: 5vh auto">
+    <div class="text-center text-white">
+      <h1 class="display-4 fw-bolder pt-5">Giấc mơ chưa bao giờ dừng lại</h1>
+      <p class="lead fw-normal text-white-80 mb-0 pb-5">Một cuốn sách là một giấc mơ mà bạn cầm trong tay.</p>
+    </div>
+  </div>
+</header>
+<!-- Section-->
+<section class="py-5">
+  <div class="container px-4 px-lg-5 mt-5">
+    <div class="d-flex justify-content-center my-5" style="padding: 10vh 0" *ngIf="isLoading">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" *ngIf="!isLoading">
+      <div class="col mb-5" *ngFor="let book of books">
+        <div class="card h-100">
+          <!-- Sale badge-->
+          <div
+            class="badge bg-dark text-white position-absolute"
+            style="top: 0.5rem; right: 0.5rem"
+            *ngIf="book.salePrice"
+          >
+            Sale
+          </div>
+          <!-- Product image-->
+          <img class="card-img-top" [src]="book.image" [alt]="book.name" />
+          <!-- Product details-->
+          <div class="card-body p-4">
+            <div class="text-center">
+              <!-- Product name-->
+              <h5 class="fw-bolder">{{ book.name }}</h5>
+              <!-- Product price-->
+              <span class="text-muted text-decoration-line-through" *ngIf="book.salePrice">
+                {{ book.price | currency: 'VND' }}
+              </span>
+              {{ book.salePrice || book.price | currency: 'VND' }}
+            </div>
+            <a class="stretched-link" [routerLink]="['/books', book.id]"></a>
+          </div>
+          <!-- Product actions-->
+          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent" style="z-index: 2">
+            <div class="text-center">
+              <button class="btn btn-outline-dark mt-auto mx-1" title="Thêm vào giỏ hàng" (click)="addToCart(book.id)">
+                <i class="bi bi-cart-plus"></i> Đặt mua
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

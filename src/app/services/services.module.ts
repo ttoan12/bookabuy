@@ -4,7 +4,7 @@ import { BooksService } from './books.service';
 import { OrdersService } from './orders.service';
 import { UsersService } from './users.service';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { AuthService } from './auth.service';
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
   declarations: [],

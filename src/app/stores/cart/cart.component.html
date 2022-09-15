@@ -1,0 +1,54 @@
+<h1 class="text-center display-4 py-2">Giỏ hàng</h1>
+<section style="min-height: 70vh">
+  <div class="container px-4 px-lg-5 mt-5">
+    <table datatable class="row-border hover table table-hover">
+      <thead class="table-light">
+        <tr>
+          <th>Tên sách</th>
+          <th>Đơn giá</th>
+          <th>Số lượng</th>
+          <th>Tổng tiền</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of books; index as i">
+          <td class="align-middle">
+            <img class="img-thumbnail me-2" style="max-height: 150px" [src]="book.image" [alt]="book.name" />
+            {{ book.name }}
+          </td>
+          <td class="align-middle">{{ book.price | currency: 'VND' }}</td>
+          <td class="align-middle">
+            <input
+              type="number"
+              class="form-control"
+              style="max-width: 75px"
+              [(ngModel)]="books[i].unit"
+              (change)="updateUnit(book.id)"
+              min="0"
+              minlength="1"
+            />
+          </td>
+          <td class="align-middle">{{ book.total | currency: 'VND' }}</td>
+          <td class="align-middle">
+            <button class="btn btn-outline-danger" (click)="removeFromCart(book.id)">Xoá</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-container *ngIf="books.length > 0">
+      <div class="row mt-4">
+        <div class="col text-center">
+          <h5>Tổng tiền: {{ sum | currency: 'VND' }}</h5>
+        </div>
+      </div>
+
+      <div class="row mt-2 mb-5">
+        <div class="col text-center">
+          <a class="btn btn-outline-primary" routerLink="/checkout">Thanh Toán</a>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</section>

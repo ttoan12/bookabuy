@@ -1,1 +1,75 @@
-<p>register works!</p>
+<section class="vh-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem">
+          <div class="card-body p-5 text-center">
+            <h3 class="mb-5">ĐĂNG KÝ</h3>
+
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+              <div class="form-outline mb-4">
+                <label class="form-label" for="name">Tên</label>
+                <input
+                  id="name"
+                  type="text"
+                  class="form-control form-control-lg"
+                  [class.is-invalid]="registerForm.controls['name'].dirty && registerForm.controls['name'].invalid"
+                  formControlName="name"
+                />
+
+                <ul class="text-start text-danger" *ngIf="registerForm.controls['name'].dirty">
+                  <li *ngIf="registerForm.controls['name'].errors?.['required']">Hãy nhập tên của bạn</li>
+                </ul>
+              </div>
+
+              <div class="form-outline mb-4">
+                <label class="form-label" for="email">Email</label>
+                <input
+                  id="email"
+                  type="email"
+                  class="form-control form-control-lg"
+                  [class.is-invalid]="registerForm.controls['email'].dirty && registerForm.controls['email'].invalid"
+                  formControlName="email"
+                />
+
+                <ul class="text-start text-danger" *ngIf="registerForm.controls['email'].dirty">
+                  <li *ngIf="registerForm.controls['email'].errors?.['required']">Hãy nhập email của bạn</li>
+                  <li *ngIf="registerForm.controls['email'].errors?.['email']">Email không hợp lệ</li>
+                </ul>
+              </div>
+
+              <div class="form-outline mb-4">
+                <label class="form-label" for="password">Mật khẩu</label>
+                <input
+                  id="password"
+                  type="password"
+                  class="form-control form-control-lg"
+                  [class.is-invalid]="
+                    registerForm.controls['password'].dirty && registerForm.controls['password'].invalid
+                  "
+                  formControlName="password"
+                />
+
+                <ul class="text-start text-danger" *ngIf="registerForm.controls['password'].dirty">
+                  <li *ngIf="registerForm.controls['password'].errors?.['required']">Hãy nhập mật khẩu</li>
+                  <li *ngIf="registerForm.controls['password'].errors?.['minlength']">
+                    Mật khẩu phải có ít nhất
+                    {{ registerForm.controls['password'].errors?.['minlength']?.requiredLength || 6 }} ký tự
+                  </li>
+                </ul>
+              </div>
+
+              <button class="btn btn-primary btn-lg btn-block" type="submit" [disabled]="registerForm.invalid">
+                Đăng ký
+              </button>
+            </form>
+
+            <hr class="my-4" />
+            <p>Bạn đã có tài khoản?</p>
+            <a class="btn btn-md btn-block btn-outline-primary" routerLink="/login">Đăng nhập</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
