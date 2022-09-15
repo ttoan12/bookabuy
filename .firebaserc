@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "web-ban-sach-d7dd6": {
+      "hosting": {
+        "web-ban-sach": [
+          "web-ban-sach-d7dd6"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "web-ban-sach-d7dd6"
+  }
+}
