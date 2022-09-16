@@ -1,1 +1,89 @@
-<p>checkout works!</p>
+<section style="min-height: 81vh">
+  <div class="container">
+    <div class="py-5 text-center">
+      <h1 class="display-4">Thanh Toán</h1>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 order-md-2 mb-4">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-muted">Giỏ hàng</span>
+          <span class="badge badge-secondary badge-pill">3</span>
+        </h4>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let item of items">
+            <div>
+              <h6 class="my-0">{{ item.name }}</h6>
+              <small class="text-muted">
+                Số lượng: {{ item.unit | number: '2.' }} - Đơn giá: {{ item.unitPrice | currency: 'VND' }}
+              </small>
+            </div>
+            <span class="text-muted">{{ item.price | currency: 'VND' }}</span>
+          </li>
+
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Tổng tiền (VNĐ)</span>
+            <strong>{{ sum | currency: 'VND' }}</strong>
+          </li>
+        </ul>
+
+        <form class="card p-2" (submit)="checkout()">
+          <button class="btn btn-primary btn-lg btn-block" type="submit" [disabled]="checkoutForm.invalid">
+            Xác nhận thanh toán
+          </button>
+        </form>
+      </div>
+
+      <div class="col-md-8 order-md-1">
+        <h4 class="mb-3">Thông tin thanh toán</h4>
+        <form [formGroup]="checkoutForm">
+          <div class="mb-3">
+            <label for="name">Họ tên</label>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                formControlName="name"
+                [class.is-invalid]="checkoutForm.controls['name'].dirty && checkoutForm.controls['name'].invalid"
+              />
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              formControlName="email"
+              [class.is-invalid]="checkoutForm.controls['email'].dirty && checkoutForm.controls['email'].invalid"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="email">Số điện thoại</label>
+            <input
+              type="text"
+              class="form-control"
+              id="phone"
+              formControlName="phone"
+              [class.is-invalid]="checkoutForm.controls['phone'].dirty && checkoutForm.controls['phone'].invalid"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="address">Địa chỉ</label>
+            <input
+              type="text"
+              class="form-control"
+              id="address"
+              formControlName="address"
+              [class.is-invalid]="checkoutForm.controls['address'].dirty && checkoutForm.controls['address'].invalid"
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

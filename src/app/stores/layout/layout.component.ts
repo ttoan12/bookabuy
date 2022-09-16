@@ -18,5 +18,9 @@ export class LayoutComponent implements OnInit {
   async ngOnInit() {
     this.user = await firstValueFrom(this.authService.user);
     this.cartCount = this.cartService.getCartCount();
+
+    this.cartService.cartObservable.subscribe(() => {
+      this.cartCount = this.cartService.getCartCount();
+    });
   }
 }

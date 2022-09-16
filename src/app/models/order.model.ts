@@ -1,10 +1,10 @@
 export class Order {
   id: string;
-  totalPrice: string;
+  userId: string;
+  totalPrice: number;
   createdAt: Date;
 
   user: {
-    userId: string;
     name: string;
     address: string;
     phone: string;

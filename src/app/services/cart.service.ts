@@ -1,15 +1,23 @@
 import { Injectable } from '@angular/core';
 import { sum } from 'lodash';
+import { BehaviorSubject } from 'rxjs';
 import { CartItem } from '../models/cart-item.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
+  private cart$: BehaviorSubject<CartItem[]> = new BehaviorSubject([] as CartItem[]);
+
   get cart() {
     const storedCart = localStorage.getItem('cart');
     const cart: CartItem[] = storedCart ? JSON.parse(storedCart) : [];
+    this.cart$.next(cart);
     return cart;
+  }
+
+  get cartObservable() {
+    return this.cart$.asObservable();
   }
 
   getCartCount() {
@@ -24,6 +32,7 @@ export class CartService {
     else cart.push({ bookId: id, unit: 1 });
 
     localStorage.setItem('cart', JSON.stringify(cart));
+    this.cart$.next(cart);
     return true;
   }
 
@@ -36,6 +45,7 @@ export class CartService {
     cart[existItem].unit = unit;
 
     localStorage.setItem('cart', JSON.stringify(cart));
+    this.cart$.next(cart);
     return cart[existItem].unit;
   }
 
@@ -48,6 +58,13 @@ export class CartService {
     const removed = cart.splice(existItem, 1);
 
     localStorage.setItem('cart', JSON.stringify(cart));
+    this.cart$.next(cart);
     return removed;
+  }
+
+  clearCart() {
+    localStorage.removeItem('cart');
+    this.cart$.next([]);
+    return true;
   }
 }
