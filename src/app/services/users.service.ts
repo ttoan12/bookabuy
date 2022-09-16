@@ -49,7 +49,7 @@ export class UsersService {
     await this.usersCollection$.doc(id).update(toPlain(data));
 
     const userSnapshot = this.usersCollection$
-      .doc(user.id)
+      .doc(id)
       .get()
       .pipe(map((x) => x.data()));
 

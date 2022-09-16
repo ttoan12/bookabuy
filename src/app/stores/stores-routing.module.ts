@@ -18,8 +18,8 @@ const routes: Routes = [
     children: [
       { path: '', component: BookListComponent, pathMatch: 'full' },
       { path: 'books/:id', component: BookDetailComponent },
-      { path: 'profile', component: ProfileComponent },
       { path: 'cart', component: CartComponent },
+      { path: 'profile', component: ProfileComponent, canActivate: [UserGuard] },
       { path: 'checkout', component: CheckoutComponent, canActivate: [UserGuard] },
     ],
   },

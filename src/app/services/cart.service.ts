@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { sum } from 'lodash';
+import { isEqual, sum } from 'lodash';
 import { BehaviorSubject } from 'rxjs';
 import { CartItem } from '../models/cart-item.model';
 
@@ -12,7 +12,7 @@ export class CartService {
   get cart() {
     const storedCart = localStorage.getItem('cart');
     const cart: CartItem[] = storedCart ? JSON.parse(storedCart) : [];
-    this.cart$.next(cart);
+    if (!isEqual(cart, this.cart$.getValue())) this.cart$.next(cart);
     return cart;
   }
 

@@ -1,1 +1,151 @@
-<p>profile works!</p>
+<section style="min-height: 82vh">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-4">
+        <p class="display-6 mb-4">Trang cá nhân</p>
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row align-items-center">
+              <div class="col-sm-4">
+                <p class="mb-0">Email</p>
+              </div>
+              <div class="col-sm-8">
+                <p class="text-muted mb-0">{{ user.email }}</p>
+              </div>
+            </div>
+            <hr />
+            <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+              <div class="row align-items-center">
+                <div class="col-sm-4">
+                  <p class="mb-0">Tên</p>
+                </div>
+                <div class="col-sm-8">
+                  <p class="text-muted mb-0" [hidden]="isEditProfile">{{ user.name }}</p>
+                  <input
+                    class="form-control"
+                    type="text"
+                    formControlName="name"
+                    hidden
+                    [hidden]="!isEditProfile"
+                    [class.is-invalid]="profileForm.controls['name'].dirty && profileForm.controls['name'].invalid"
+                  />
+                </div>
+              </div>
+              <hr />
+              <div class="row align-items-center">
+                <div class="col-sm-4">
+                  <p class="mb-0">Điện thoại</p>
+                </div>
+                <div class="col-sm-8">
+                  <p class="text-muted mb-0" [hidden]="isEditProfile">{{ user.phone }}</p>
+                  <input
+                    class="form-control"
+                    type="text"
+                    formControlName="phone"
+                    hidden
+                    [hidden]="!isEditProfile"
+                    [class.is-invalid]="profileForm.controls['phone'].dirty && profileForm.controls['phone'].invalid"
+                  />
+                </div>
+              </div>
+              <hr />
+              <div class="row align-items-center">
+                <div class="col-sm-4">
+                  <p class="mb-0">Địa chỉ</p>
+                </div>
+                <div class="col-sm-8">
+                  <p class="text-muted mb-0" [hidden]="isEditProfile">{{ user.address }}</p>
+                  <textarea
+                    class="form-control"
+                    type="text"
+                    formControlName="address"
+                    hidden
+                    [hidden]="!isEditProfile"
+                    [class.is-invalid]="
+                      profileForm.controls['address'].dirty && profileForm.controls['address'].invalid
+                    "
+                  ></textarea>
+                </div>
+              </div>
+              <hr />
+              <div class="row align-items-center">
+                <div class="d-flex justify-content-center mb-2">
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    *ngIf="isEditProfile"
+                    [disabled]="profileForm.status === 'DISABLED'"
+                  >
+                    Lưu
+                  </button>
+                  <button
+                    type="button"
+                    class="ms-2 btn btn-outline-secondary"
+                    *ngIf="isEditProfile"
+                    [disabled]="profileForm.status === 'DISABLED'"
+                    (click)="cancelEditProfile()"
+                  >
+                    Huỷ
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-outline-primary ms-1"
+                    (click)="editProfile()"
+                    *ngIf="!isEditProfile"
+                  >
+                    Thay đổi
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="row">
+          <div class="col">
+            <p class="display-6 mb-4">Danh sách đơn hàng</p>
+            <div class="mb-4" *ngFor="let order of orders?.reverse()">
+              <div class="card mb-4 mb-md-0">
+                <div class="card-header" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse_' + order.id">
+                  <div class="cart-title d-flex justify-content-between">
+                    <span>{{ order.id | uppercase }}</span>
+                    <small>{{ order.createdAt | date: 'dd/MM/yyyy HH:mm' }}</small>
+                  </div>
+                  <div class="card-subtitle d-flex flex-column" style="margin-top: 1px">
+                    <small class="text-muted lh-sm">Người nhận: {{ order.user.name }} - {{ order.user.phone }}</small>
+                    <small class="text-muted lh-sm">Địa chỉ: {{ order.user.address }}</small>
+                  </div>
+                </div>
+                <div class="collapse" [id]="'collapse_' + order.id">
+                  <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                      <li
+                        class="list-group-item d-flex justify-content-between lh-condensed"
+                        *ngFor="let item of order.products"
+                      >
+                        <div>
+                          <h6 class="my-0">{{ item.name }}</h6>
+                          <small class="text-muted">
+                            Số lượng: {{ item.unit | number: '2.' }} - Đơn giá: {{ item.unitPrice | currency: 'VND' }}
+                          </small>
+                        </div>
+                        <span class="text-muted">{{ item.price | currency: 'VND' }}</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="card-footer">
+                    <div class="d-flex justify-content-between mx-3">
+                      <span>Tổng tiền (VNĐ)</span>
+                      <strong>{{ order.totalPrice | currency: 'VND' }}</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
