@@ -8,6 +8,7 @@ import { AdminBookListComponent } from './admin-book-list/admin-book-list.compon
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminOrderDetailComponent } from './admin-order-detail/admin-order-detail.component';
 import { AdminOrderListComponent } from './admin-order-list/admin-order-list.component';
+import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import { AdminRegisterComponent } from './admin-register/admin-register.component';
 import { AdminLayoutComponent } from './layout/layout.component';
 
@@ -22,6 +23,7 @@ const routes: Routes = [
       { path: 'books', component: AdminBookListComponent },
       { path: 'books/create', component: AdminBookCreateComponent },
       { path: 'books/:id', component: AdminBookEditComponent },
+      { path: 'profile', component: AdminProfileComponent },
     ],
   },
 

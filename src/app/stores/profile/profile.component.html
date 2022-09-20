@@ -21,14 +21,7 @@
                 </div>
                 <div class="col-sm-8">
                   <p class="text-muted mb-0" [hidden]="isEditProfile">{{ user.name }}</p>
-                  <input
-                    class="form-control"
-                    type="text"
-                    formControlName="name"
-                    hidden
-                    [hidden]="!isEditProfile"
-                    [class.is-invalid]="profileForm.controls['name'].dirty && profileForm.controls['name'].invalid"
-                  />
+                  <input class="form-control" type="text" formControlName="name" hidden [hidden]="!isEditProfile" />
                 </div>
               </div>
               <hr />
@@ -38,14 +31,7 @@
                 </div>
                 <div class="col-sm-8">
                   <p class="text-muted mb-0" [hidden]="isEditProfile">{{ user.phone }}</p>
-                  <input
-                    class="form-control"
-                    type="text"
-                    formControlName="phone"
-                    hidden
-                    [hidden]="!isEditProfile"
-                    [class.is-invalid]="profileForm.controls['phone'].dirty && profileForm.controls['phone'].invalid"
-                  />
+                  <input class="form-control" type="text" formControlName="phone" hidden [hidden]="!isEditProfile" />
                 </div>
               </div>
               <hr />
@@ -61,9 +47,6 @@
                     formControlName="address"
                     hidden
                     [hidden]="!isEditProfile"
-                    [class.is-invalid]="
-                      profileForm.controls['address'].dirty && profileForm.controls['address'].invalid
-                    "
                   ></textarea>
                 </div>
               </div>

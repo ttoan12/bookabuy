@@ -40,47 +40,23 @@
           <div class="mb-3">
             <label for="name">Họ tên</label>
             <div class="input-group">
-              <input
-                type="text"
-                class="form-control"
-                id="name"
-                formControlName="name"
-                [class.is-invalid]="checkoutForm.controls['name'].dirty && checkoutForm.controls['name'].invalid"
-              />
+              <input type="text" class="form-control" id="name" formControlName="name" />
             </div>
           </div>
 
           <div class="mb-3">
             <label for="email">Email</label>
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              formControlName="email"
-              [class.is-invalid]="checkoutForm.controls['email'].dirty && checkoutForm.controls['email'].invalid"
-            />
+            <input type="email" class="form-control" id="email" formControlName="email" />
           </div>
 
           <div class="mb-3">
             <label for="email">Số điện thoại</label>
-            <input
-              type="text"
-              class="form-control"
-              id="phone"
-              formControlName="phone"
-              [class.is-invalid]="checkoutForm.controls['phone'].dirty && checkoutForm.controls['phone'].invalid"
-            />
+            <input type="text" class="form-control" id="phone" formControlName="phone" />
           </div>
 
           <div class="mb-3">
             <label for="address">Địa chỉ</label>
-            <input
-              type="text"
-              class="form-control"
-              id="address"
-              formControlName="address"
-              [class.is-invalid]="checkoutForm.controls['address'].dirty && checkoutForm.controls['address'].invalid"
-            />
+            <input type="text" class="form-control" id="address" formControlName="address" />
           </div>
         </form>
       </div>

@@ -9,13 +9,7 @@
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
               <div class="form-outline mb-4">
                 <label class="form-label" for="email">Email</label>
-                <input
-                  id="email"
-                  type="email"
-                  class="form-control form-control-lg"
-                  [class.is-invalid]="loginForm.controls['email'].dirty && loginForm.controls['email'].invalid"
-                  formControlName="email"
-                />
+                <input id="email" type="email" class="form-control form-control-lg" formControlName="email" />
 
                 <ul class="text-start text-danger" *ngIf="loginForm.controls['email'].dirty">
                   <li *ngIf="loginForm.controls['email'].errors?.['required']">Hãy nhập email của bạn</li>
@@ -25,13 +19,7 @@
 
               <div class="form-outline mb-4">
                 <label class="form-label" for="password">Mật khẩu</label>
-                <input
-                  id="password"
-                  type="password"
-                  class="form-control form-control-lg"
-                  [class.is-invalid]="loginForm.controls['password'].dirty && loginForm.controls['password'].invalid"
-                  formControlName="password"
-                />
+                <input id="password" type="password" class="form-control form-control-lg" formControlName="password" />
 
                 <ul class="text-start text-danger" *ngIf="loginForm.controls['password'].dirty">
                   <li *ngIf="loginForm.controls['password'].errors?.['required']">Hãy nhập mật khẩu</li>

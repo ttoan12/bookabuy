@@ -11,6 +11,7 @@ import { AdminAuthService } from 'src/app/services/auth/admin-auth.service';
 export class AdminLayoutComponent implements OnInit {
   user?: User;
   currentPath: string;
+  sideBarToggled = false;
 
   constructor(private authService: AdminAuthService, private router: Router) {}
 

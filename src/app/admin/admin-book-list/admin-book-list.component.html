@@ -1,1 +1,48 @@
-<p>admin-book-list works!</p>
+<main class="content">
+  <div class="container-fluid p-0">
+    <h1 class="h3 mb-3"><strong>Book</strong> Management</h1>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header d-flex justify-content-between">
+            <h5 class="card-title mb-0">Book list</h5>
+            <a class="btn btn-primary" routerLink="/admin/books/create">Add</a>
+          </div>
+          <div class="card-body">
+            <table
+              id="bookTable"
+              class="table table-hover table-borderless row-border hover w-100"
+              datatable
+              [dtOptions]="dtOptions"
+              [dtTrigger]="dtTrigger"
+            >
+              <thead class="table-primary">
+                <tr>
+                  <th>Name</th>
+                  <th>Author</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody class="mb-1">
+                <tr *ngFor="let book of books" role="button" id="book-{{ book.id }}" [attr.data-id]="book.id">
+                  <td>
+                    <img [src]="book.image" [alt]="book.name" class="me-1" style="height: 50px" />
+                    {{ book.name }}
+                  </td>
+                  <td>{{ book.author }}</td>
+                  <td>
+                    <span class="text-decoration-line-through me-1" *ngIf="book.salePrice">
+                      {{ book.price | currency: 'VND' }}
+                    </span>
+                    <span>{{ book.salePrice || book.price | currency: 'VND' }}</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,1 +1,73 @@
-<p>admin-book-edit works!</p>
+<main class="">
+  <div class="container-fluid p-0">
+    <h1 class="h3 mb-3"><strong>Book</strong> Management</h1>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title mb-0">Update book</h5>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="editBookForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-12 col-md-6 mb-3">
+                  <label class="form-label">Name</label>
+                  <input type="text" class="form-control" placeholder="Enter book name" formControlName="name" />
+                </div>
+
+                <div class="col-12 col-md-6 mb-3">
+                  <label class="form-label">Author</label>
+                  <input type="text" class="form-control" placeholder="Enter author name" formControlName="author" />
+                </div>
+
+                <div class="col-12 mb-3">
+                  <label class="form-label">Image</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter book cover-image url"
+                    formControlName="image"
+                  />
+                </div>
+
+                <div class="col-12 col-md-6 mb-3">
+                  <label class="form-label">Price</label>
+                  <input type="number" class="form-control" placeholder="Enter book price" formControlName="price" />
+                </div>
+
+                <div class="col-12 col-md-6 mb-3">
+                  <label class="form-label">Sale Price</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    placeholder="Enter book sale-price"
+                    formControlName="salePrice"
+                  />
+                </div>
+
+                <div class="col-12 mb-3">
+                  <label class="form-label">Description</label>
+                  <textarea
+                    class="form-control"
+                    placeholder="Some description about the book"
+                    formControlName="description"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="mt-4">
+                <button
+                  class="btn btn-primary"
+                  type="submit"
+                  [disabled]="editBookForm.invalid || editBookForm.disabled"
+                >
+                  Update
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

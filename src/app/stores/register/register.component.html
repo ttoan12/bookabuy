@@ -9,13 +9,7 @@
             <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
               <div class="form-outline mb-4">
                 <label class="form-label" for="name">Tên</label>
-                <input
-                  id="name"
-                  type="text"
-                  class="form-control form-control-lg"
-                  [class.is-invalid]="registerForm.controls['name'].dirty && registerForm.controls['name'].invalid"
-                  formControlName="name"
-                />
+                <input id="name" type="text" class="form-control form-control-lg" formControlName="name" />
 
                 <ul class="text-start text-danger" *ngIf="registerForm.controls['name'].dirty">
                   <li *ngIf="registerForm.controls['name'].errors?.['required']">Hãy nhập tên của bạn</li>
@@ -24,13 +18,7 @@
 
               <div class="form-outline mb-4">
                 <label class="form-label" for="email">Email</label>
-                <input
-                  id="email"
-                  type="email"
-                  class="form-control form-control-lg"
-                  [class.is-invalid]="registerForm.controls['email'].dirty && registerForm.controls['email'].invalid"
-                  formControlName="email"
-                />
+                <input id="email" type="email" class="form-control form-control-lg" formControlName="email" />
 
                 <ul class="text-start text-danger" *ngIf="registerForm.controls['email'].dirty">
                   <li *ngIf="registerForm.controls['email'].errors?.['required']">Hãy nhập email của bạn</li>
@@ -40,15 +28,7 @@
 
               <div class="form-outline mb-4">
                 <label class="form-label" for="password">Mật khẩu</label>
-                <input
-                  id="password"
-                  type="password"
-                  class="form-control form-control-lg"
-                  [class.is-invalid]="
-                    registerForm.controls['password'].dirty && registerForm.controls['password'].invalid
-                  "
-                  formControlName="password"
-                />
+                <input id="password" type="password" class="form-control form-control-lg" formControlName="password" />
 
                 <ul class="text-start text-danger" *ngIf="registerForm.controls['password'].dirty">
                   <li *ngIf="registerForm.controls['password'].errors?.['required']">Hãy nhập mật khẩu</li>

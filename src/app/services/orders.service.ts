@@ -51,7 +51,7 @@ export class OrdersService {
     await this.ordersCollection$.doc(id).update(toPlain(data));
 
     const orderSnapshot = this.ordersCollection$
-      .doc(order.id)
+      .doc(id)
       .get()
       .pipe(map((x) => x.data()));
 

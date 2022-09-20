@@ -47,7 +47,7 @@ export class BooksService {
     await this.booksCollection$.doc(id).update(toPlain(data));
 
     const bookSnapshot = this.booksCollection$
-      .doc(book.id)
+      .doc(id)
       .get()
       .pipe(map((x) => x.data()));
 
