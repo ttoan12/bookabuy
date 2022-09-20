@@ -1,0 +1,56 @@
+<link href="/assets/css/admin-kit.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+
+<section>
+  <div class="wrapper">
+    <nav id="sidebar" class="sidebar js-sidebar">
+      <div class="sidebar-content js-simplebar">
+        <a class="sidebar-brand" routerLink="/admin">
+          <span class="align-middle">Bookabuy Admin</span>
+        </a>
+
+        <ul class="sidebar-nav">
+          <li class="sidebar-item" [class.active]="currentPath == '/admin' || currentPath.startsWith('/admin/orders/')">
+            <a class="sidebar-link" routerLink="/admin">
+              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+            </a>
+          </li>
+
+          <li class="sidebar-item" [class.active]="currentPath.startsWith('/admin/books')">
+            <a class="sidebar-link" routerLink="/admin/books">
+              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Book Management</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="main">
+      <nav class="navbar navbar-expand navbar-light navbar-bg">
+        <div class="ms-auto">
+          <a
+            class="nav-link dropdown-toggle d-none d-sm-inline-block"
+            href="#"
+            id="profileDropdownBtn"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="text-dark">{{ user?.name }}</span>
+          </a>
+
+          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdownBtn">
+            <a class="dropdown-item" routerLink="/admin">
+              <i class="align-middle me-1 bi bi-person-fill"></i> Profile
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)="logOut()"> <i class="bi bi-box-arrow-right"></i> Log out </a>
+          </div>
+        </div>
+      </nav>
+
+      <main class="content">
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  </div>
+</section>

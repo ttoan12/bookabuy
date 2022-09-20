@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 import { User } from '../../models/user.model';
-import { UsersService } from '../users.service';
+import { AdminService } from '../admin.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class AdminAuthService {
   private user$: Observable<User | undefined>;
   private userId$ = new BehaviorSubject<string | null>(null);
 
-  constructor(private afAuth: AngularFireAuth, private userService: UsersService) {
+  constructor(private afAuth: AngularFireAuth, private userService: AdminService) {
     this.user$ = this.userId$.pipe(switchMap((userId) => userService.getById(userId)));
-    this.userId$.next(localStorage.getItem('userId'));
+    this.userId$.next(localStorage.getItem('adminId'));
   }
 
   get user() {
@@ -24,7 +24,7 @@ export class AuthService {
     try {
       const credential = await this.afAuth.signInWithEmailAndPassword(email, password);
       if (credential.user) {
-        localStorage.setItem('userId', credential.user.uid);
+        localStorage.setItem('adminId', credential.user.uid);
         this.userId$.next(credential.user.uid);
         return true;
       }
@@ -36,7 +36,7 @@ export class AuthService {
 
   async logout() {
     await this.afAuth.signOut();
-    localStorage.removeItem('userId');
+    localStorage.removeItem('adminId');
     this.userId$.next(null);
     return true;
   }
@@ -54,7 +54,7 @@ export class AuthService {
 
       const created = await this.userService.create(user);
       if (created) {
-        localStorage.setItem('userId', created.id);
+        localStorage.setItem('adminId', created.id);
         this.userId$.next(created.id);
         return true;
       }

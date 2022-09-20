@@ -9,6 +9,8 @@ import { AdminOrderListComponent } from './admin-order-list/admin-order-list.com
 import { AdminOrderDetailComponent } from './admin-order-detail/admin-order-detail.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminRegisterComponent } from './admin-register/admin-register.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AdminLayoutComponent } from './layout/layout.component';
 
 @NgModule({
   declarations: [
@@ -18,8 +20,9 @@ import { AdminRegisterComponent } from './admin-register/admin-register.componen
     AdminOrderListComponent,
     AdminOrderDetailComponent,
     AdminLoginComponent,
-    AdminRegisterComponent
+    AdminRegisterComponent,
+    AdminLayoutComponent,
   ],
-  imports: [CommonModule, AdminRoutingModule],
+  imports: [CommonModule, AdminRoutingModule, FormsModule, ReactiveFormsModule],
 })
 export class AdminModule {}
