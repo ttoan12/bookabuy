@@ -24,12 +24,12 @@ export class CartService {
     return sum(this.cart.map((item) => item.unit));
   }
 
-  addToCart(id: string) {
+  addToCart(id: string, unit: number = 1) {
     const cart = this.cart;
 
     const existItem = cart.findIndex((item) => item.bookId === id);
-    if (existItem > -1) cart[existItem].unit += 1;
-    else cart.push({ bookId: id, unit: 1 });
+    if (existItem > -1) cart[existItem].unit += unit;
+    else cart.push({ bookId: id, unit });
 
     localStorage.setItem('cart', JSON.stringify(cart));
     this.cart$.next(cart);
