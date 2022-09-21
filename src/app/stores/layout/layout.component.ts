@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CartService } from 'src/app/services/cart.service';
@@ -16,7 +15,7 @@ export class LayoutComponent implements OnInit {
   constructor(private authService: AuthService, private cartService: CartService) {}
 
   async ngOnInit() {
-    this.user = await firstValueFrom(this.authService.user);
+    this.authService.user.subscribe((user) => (this.user = user));
     this.cartCount = this.cartService.getCartCount();
 
     this.cartService.cartObservable.subscribe(() => {

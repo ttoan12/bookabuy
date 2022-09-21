@@ -53,19 +53,14 @@
               <hr />
               <div class="row align-items-center">
                 <div class="d-flex justify-content-center mb-2">
-                  <button
-                    type="submit"
-                    class="btn btn-primary"
-                    *ngIf="isEditProfile"
-                    [disabled]="profileForm.status === 'DISABLED'"
-                  >
+                  <button type="submit" class="btn btn-primary" *ngIf="isEditProfile" [disabled]="profileForm.disabled">
                     Lưu
                   </button>
                   <button
                     type="button"
                     class="ms-2 btn btn-outline-secondary"
                     *ngIf="isEditProfile"
-                    [disabled]="profileForm.status === 'DISABLED'"
+                    [disabled]="profileForm.disabled"
                     (click)="cancelEditProfile()"
                   >
                     Huỷ

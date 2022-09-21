@@ -63,4 +63,15 @@ export class AdminAuthService {
       return false;
     }
   }
+
+  async updateProfile(id: string, name: string, phone: string, address: string) {
+    const user = new User();
+    user.name = name;
+    user.phone = phone;
+    user.address = address;
+
+    const result = await this.userService.update(id, user);
+    if (result) this.userId$.next(result.id);
+    return result;
+  }
 }

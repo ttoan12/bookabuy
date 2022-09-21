@@ -1,1 +1,44 @@
-<p>admin-profile works!</p>
+<main>
+  <div class="container-fluid p-0">
+    <h1 class="h3 mb-3">Profile</h1>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-12 col-md-6 mb-3">
+                  <label class="form-label">Email</label>
+                  <input type="email" class="form-control" formControlName="email" />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12 col-md-6 mb-3">
+                  <label class="form-label">Name</label>
+                  <input type="text" class="form-control" placeholder="Enter your name" formControlName="name" />
+                </div>
+
+                <div class="col-12 col-md-6 mb-3">
+                  <label class="form-label">Phone</label>
+                  <input type="text" class="form-control" placeholder="Enter phone number" formControlName="phone" />
+                </div>
+
+                <div class="col-12 mb-3">
+                  <label class="form-label">Address</label>
+                  <textarea class="form-control" formControlName="address"></textarea>
+                </div>
+              </div>
+              <div class="mt-4">
+                <button class="btn btn-primary" type="submit" [disabled]="profileForm.invalid || profileForm.disabled">
+                  Update
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
