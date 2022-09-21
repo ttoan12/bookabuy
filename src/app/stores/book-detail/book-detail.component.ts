@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { take } from 'rxjs';
+import { BehaviorSubject, switchMap } from 'rxjs';
 import { Book } from 'src/app/models/book.model';
 import { BooksService } from 'src/app/services/books.service';
 import { CartService } from 'src/app/services/cart.service';
@@ -11,7 +11,7 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./book-detail.component.css'],
 })
 export class BookDetailComponent implements OnInit {
-  id: string;
+  id: BehaviorSubject<string> = new BehaviorSubject('');
   book: Book;
   books: Book[];
   unit = 1;
@@ -24,18 +24,22 @@ export class BookDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.id = this.activatedRoute.snapshot.params['id'];
-    this.bookService.getById(this.id).subscribe((book) => {
+    this.activatedRoute.params.subscribe((params) => this.id.next(params['id']));
+    this.id.pipe(switchMap((id) => this.bookService.getById(id))).subscribe((book) => {
       if (book) this.book = book;
       else this.router.navigate([]);
     });
-    this.bookService.books.pipe(take(1)).subscribe((books) => {
-      this.books = books.sort(() => 0.5 - Math.random()).slice(0, 4);
-    });
+    this.id.pipe(switchMap(() => this.bookService.books)).subscribe(
+      (books) =>
+        (this.books = books
+          .filter((book) => book.id != this.id.value)
+          .sort(() => 0.5 - Math.random())
+          .slice(0, 4))
+    );
   }
 
   addToCart(id?: string, unit?: number) {
-    id ?? (id = this.id);
+    id ?? (id = this.id.value);
     unit ?? (unit = this.unit);
     const result = this.cartService.addToCart(id, unit);
     if (result) {
